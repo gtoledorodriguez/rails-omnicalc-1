@@ -50,4 +50,15 @@ class CalculateController < ApplicationController
     @payment = @payment.to_fs(:currency)
     render({ template: "calculator_templates/payment_result" })
   end
+
+  def random_new
+    render({ template: "calculator_templates/random_new" })
+  end
+
+  def random_result
+    @min = params.fetch("min").to_f
+    @max = params.fetch("max").to_f
+    @rand_num = rand(@min..@max)
+    render({ template: "calculator_templates/random_result" })
+  end
 end
