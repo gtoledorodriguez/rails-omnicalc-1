@@ -5,4 +5,7 @@ Rails.application.routes.draw do
 
   get("/square_root/new", { controller: "calculate", action: "square_root_new"})
   get("/square_root/results", { controller: "calculate", action: "square_root_result"})
+
+  get("/payment/new", { controller: "calculate", action: "payment_new"})
+  get("/payment/results", { controller: "calculate", action: "payment_result"})
 end

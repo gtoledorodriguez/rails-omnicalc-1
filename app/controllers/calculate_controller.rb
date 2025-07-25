@@ -28,4 +28,26 @@ class CalculateController < ApplicationController
     @square_root = Math.sqrt(@number)
     render({ template: "calculator_templates/square_root_result" })
   end
+
+  def payment_new
+    render({ template: "calculator_templates/payment_new" })
+  end
+
+  def payment_result
+    @apr = params.fetch("apr").to_f
+    @years = params.fetch("years").to_i
+    @pv = params.fetch("pv").to_f
+
+    r = (@apr / 100) / 12
+    n = @years * 12
+
+    numerator = r * @pv
+    denominator = 1 - (1 + r) ** (-n)
+    @payment = numerator / denominator
+
+    @apr = @apr.to_fs(:percentage, { :precision => 4 })
+    @pv = @pv.to_fs(:currency)
+    @payment = @payment.to_fs(:currency)
+    render({ template: "calculator_templates/payment_result" })
+  end
 end
